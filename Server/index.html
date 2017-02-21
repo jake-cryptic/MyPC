@@ -35,8 +35,9 @@
 		#home,#mypc{display:none;}
 		#mypc{margin:1%;width:98%;}
 		#pc_nm{margin:1% 0;}
-		.sect_title{font-size:2.3em;font-weight:400;}
+		.sect_title{font-size:2.3em;font-weight:400;cursor:pointer;}
 		table {
+			display:none;
 			width:100%;
 			border-collapse:collapse;
 			background-color:rgba(0,0,0,0.75);
@@ -48,6 +49,7 @@
 			font-size:1.5em;
 		}
 		tr {
+			transition:.2s ease-in-out all;
 			border:1px solid black;
 			text-align:center;
 		}
@@ -55,8 +57,10 @@
 			padding:1em;
 		}
 		table tbody>tr:hover {
-			background-color:rgba(255,255,255,0.5);
+			background-color:rgba(255,255,255,0.7);
 		}
+		.light{background-color:rgba(255,255,255,0.5);color:#000;}
+		.dark{background-color:rgba(0,0,0,0.3);color:#fff;}
 		</style>
 	
 	</head>
@@ -73,14 +77,22 @@
 		<div id="mypc">
 			<h2 id="pc_nm">MyPC</h2>
 			<span id="pc_rg">UNK</span><br />
-			<span class="sect_title">System</span><table><thead><th>Key</th><th>Value</th></thead><tbody id="sys" class="inf_sect"></tbody></table>
-			<span class="sect_title">CPU</span><table><thead><th>Key</th><th>Value</th></thead><tbody id="cpu" class="inf_sect"></tbody></table>
-			<span class="sect_title">Motherboard</span><table><thead><th>Key</th><th>Value</th></thead><tbody id="bse" class="inf_sect"></tbody></table>
-			<span class="sect_title">RAM</span><table><thead><th>Key</th><th>Value</th></thead><tbody id="ram" class="inf_sect"></tbody></table>
-			<span class="sect_title">GPU</span><table><thead><th>Key</th><th>Value</th></thead><tbody id="gpu" class="inf_sect"></tbody></table>
-			<span class="sect_title">Storage</span><table><thead><th>Key</th><th>Value</th></thead><tbody id="hdd" class="inf_sect"></tbody></table>
-			<span class="sect_title">Network Cards</span><table><thead><th>Key</th><th>Value</th></thead><tbody id="nic" class="inf_sect"></tbody></table>
-			<span class="sect_title">User Accounts</span><table><thead><th>Key</th><th>Value</th></thead><tbody id="usr" class="inf_sect"></tbody></table>
+			<span class="sect_title" data-opens="sys">System</span><br />
+			<table id="tbl_sys"><tbody id="sys" class="inf_sect"></tbody></table>
+			<span class="sect_title" data-opens="cpu">CPU</span><br />
+			<table id="tbl_cpu"><tbody id="cpu" class="inf_sect"></tbody></table>
+			<span class="sect_title" data-opens="bse">Motherboard</span><br />
+			<table id="tbl_bse"><tbody id="bse" class="inf_sect"></tbody></table>
+			<span class="sect_title" data-opens="ram">RAM</span><br />
+			<table id="tbl_ram"><tbody id="ram" class="inf_sect"></tbody></table>
+			<span class="sect_title" data-opens="gpu">GPU</span><br />
+			<table id="tbl_gpu"><tbody id="gpu" class="inf_sect"></tbody></table>
+			<span class="sect_title" data-opens="hdd">Storage</span><br />
+			<table id="tbl_hdd"><tbody id="hdd" class="inf_sect"></tbody></table>
+			<span class="sect_title" data-opens="nic">Network Cards</span><br />
+			<table id="tbl_nic"><tbody id="nic" class="inf_sect"></tbody></table>
+			<span class="sect_title" data-opens="usr">User Accounts</span><br />
+			<table id="tbl_usr"><tbody id="usr" class="inf_sect"></tbody></table>
 		</div>
 		
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>

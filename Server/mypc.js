@@ -36,14 +36,23 @@ var ShowHomePage = function(){
 var ShowUserResult = function(data){
 	console.log(data);
 	CreateMyPC(data);
+	
+	$(".sect_title").click(function(){
+		if ($("#tbl_" + $(this).data("opens")).is(":visible")){
+			$("#tbl_" + $(this).data("opens")).slideUp(500);
+		} else {
+			$("#tbl_" + $(this).data("opens")).slideDown(500);
+		}
+	});
+	
 	$("#loader").fadeOut(200);
 	$("#mypc").delay(200).fadeIn(200);
 };
 var CreateMyPC = function(d){
-	document.title = "MyPC | " + d.CPU[7];
+	document.title = "MyPC | " + d.CPU[0][7];
 	
 	// Set PC name
-	$("#pc_nm").html(d.CPU[7]);
+	$("#pc_nm").html(d.CPU[0][7]);
 	$("#pc_rg").html("Report Generated: " + d.Generated);
 	
 	// System Section
@@ -63,20 +72,30 @@ var CreateMyPC = function(d){
 	);
 	
 	// CPU Section
-	$("#cpu").append(
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("Manufacturer"),
-			$("<td/>", {}).text(d.CPU[2])
-		),
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("CPU Name"),
-			$("<td/>", {}).text(d.CPU[4])
-		),
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("Clock Speed"),
-			$("<td/>", {}).text(d.CPU[1])
-		)
-	);
+	for (var i = 0;i<d.CPU.length;i++){
+		var clss = "dark";
+		if (i % 2 == 0) clss = "light";
+		$("#cpu").append(
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Manufacturer"),
+				$("<td/>", {}).text(d.CPU[i][2])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("CPU Name"),
+				$("<td/>", {}).text(d.CPU[i][4])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Clock Speed"),
+				$("<td/>", {}).text(d.CPU[i][1])
+			)
+		);
+	}
 	
 	// Motherboard Section
 	$("#bse").append(
@@ -96,57 +115,165 @@ var CreateMyPC = function(d){
 	
 	// RAM Section
 	$("#ram").append(
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("Manufacturer"),
-			$("<td/>", {}).text(d.RAM[0])
-		),
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("Capacity"),
-			$("<td/>", {}).text(d.RAM[1])
+		$("<tr/>",{
+			class:"dark"
+		}).append(
+			$("<td/>", {}).text("Sticks"),
+			$("<td/>", {}).text(d.RAM.length)
 		)
 	);
+	for (var i = 0;i<d.RAM.length;i++){
+		var clss = "dark";
+		if (i % 2 == 0) clss = "light";
+		$("#ram").append(
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Manufacturer"),
+				$("<td/>", {}).text(d.RAM[i][0])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Capacity"),
+				$("<td/>", {}).text(d.RAM[i][1])
+			)
+		);
+	}
 	
 	// GPU Section
-	$("#gpu").append(
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("Manufacturer"),
-			$("<td/>", {}).text(d.GPU[0])
-		),
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("GPU"),
-			$("<td/>", {}).text(d.GPU[3])
-		),
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("GPU ID"),
-			$("<td/>", {}).text(d.GPU[2])
-		),
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("GPU RAM"),
-			$("<td/>", {}).text(d.GPU[1])
-		)
-	);
+	for (var i = 0;i<d.GPU.length;i++){
+		var clss = "dark";
+		if (i % 2 == 0) clss = "light";
+		$("#gpu").append(
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Manufacturer"),
+				$("<td/>", {}).text(d.GPU[i][0])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("GPU"),
+				$("<td/>", {}).text(d.GPU[i][3])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("GPU ID"),
+				$("<td/>", {}).text(d.GPU[i][2])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("GPU RAM"),
+				$("<td/>", {}).text(d.GPU[i][1])
+			)
+		);
+	}
+	
+	// Storage Section
+	for (var i = 0;i<d.HDD.length;i++){
+		var clss = "dark";
+		if (i % 2 == 0) clss = "light";
+		$("#hdd").append(
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Drive Name"),
+				$("<td/>", {}).text(d.HDD[i][6] + " (" + d.HDD[i][7] + ")")
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("File System"),
+				$("<td/>", {}).text(d.HDD[i][3])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Free/Total Space"),
+				$("<td/>", {}).text(d.HDD[i][4] + " of " + d.HDD[i][5])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Description"),
+				$("<td/>", {}).text(d.HDD[i][1])
+			)
+		);
+	}
+	
+	// Network Cards Section
+	for (var i = 0;i<d.NIC.length;i++){
+		if (d.NIC[i].length == 8){
+			var clss = "dark";
+			if (i % 2 == 0) clss = "light";
+			$("#nic").append(
+				$("<tr/>",{
+					class:clss
+				}).append(
+					$("<td/>", {}).text("Manufacturer"),
+					$("<td/>", {}).text(d.NIC[i][3])
+				),
+				$("<tr/>",{
+					class:clss
+				}).append(
+					$("<td/>", {}).text("Name"),
+					$("<td/>", {}).text(d.NIC[i][5])
+				),
+				$("<tr/>",{
+					class:clss
+				}).append(
+					$("<td/>", {}).text("MAC Address"),
+					$("<td/>", {}).text(d.NIC[i][2])
+				),
+				$("<tr/>",{
+					class:clss
+				}).append(
+					$("<td/>", {}).text("Description"),
+					$("<td/>", {}).text(d.NIC[i][0])
+				)
+			);
+		}
+	}
 	
 	// User Account Section
-	$("#usr").append(
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("Username"),
-			$("<td/>", {}).text(d.USR[0])
-		),
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("Description"),
-			$("<td/>", {}).text(d.USR[1])
-		),
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("Disabled"),
-			$("<td/>", {}).text(d.USR[2])
-		),
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("Name"),
-			$("<td/>", {}).text(d.USR[3])
-		),
-		$("<tr/>",{}).append(
-			$("<td/>", {}).text("Password Required"),
-			$("<td/>", {}).text(d.USR[4])
-		)
-	);
+	for (var i = 0;i<d.USR.length;i++){
+		var clss = "dark";
+		if (i % 2 == 0) clss = "light";
+		$("#usr").append(
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Username"),
+				$("<td/>", {}).text(d.USR[i][0])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Description"),
+				$("<td/>", {}).text(d.USR[i][1])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Disabled"),
+				$("<td/>", {}).text(d.USR[i][2])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Name"),
+				$("<td/>", {}).text(d.USR[i][3])
+			),
+			$("<tr/>",{
+				class:clss
+			}).append(
+				$("<td/>", {}).text("Password Required"),
+				$("<td/>", {}).text(d.USR[i][4])
+			)
+		);
+	}
 };
