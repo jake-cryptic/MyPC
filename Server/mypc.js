@@ -1,12 +1,26 @@
-if (!window.jQuery) document.write("<script src='jquery.js'></script>");
+if (!window.jQuery){
+	// Check for jquery
+	var el = document.createElement("script");
+	el.src = "jquery.js";
+	el.type = "text/javascript";
+	document.head.appendChild(el);
+}
 
 $(document).ready(function(){
+	/*
+	 *	When the document loads, check if MyPC client is running.
+	 *	If it is, then get the JSON data from the server.
+	*/
 	$.ajax({
 		url:"http://localhost:9091/results/",
-        crossDomain: true,
+		crossDomain: true,
 		type:"GET",
 		dataType:"json",
+		beforeSend: function() {
+			$("#loading_txt").html("Please wait");
+		},
 		success: function(data) {
+			$("#loading_txt").html("Generating Report");
 			ShowUserResult(data);
 		},
 		error: function(e) {
@@ -16,9 +30,13 @@ $(document).ready(function(){
 });
 
 var CloseServer = function(){
+	// What is this, you say?!
+	// Secret ;)
+	// ...
+	// (actually you could probably guess)
 	$.ajax({
 		url:"http://localhost:9091/close",
-        crossDomain: true,
+		crossDomain: true,
 		type:"GET",
 		dataType:"text",
 		success: function(data) {
@@ -30,18 +48,46 @@ var CloseServer = function(){
 	});
 };
 var ShowHomePage = function(){
+	document.title = "MyPC | Homepage";
+	
+	// Activate the homepage links
+	$("#dl_mypc").click(function(){
+		$("body").fadeOut(250);
+		window.location.href = "https://github.com/jake-cryptic/MyPC/releases/";
+	});
+	$("#np_git").click(function(){
+		$("body").fadeOut(250);
+		window.location.href = "https://github.com/jake-cryptic/MyPC";
+	});
+	$("#goto_http").click(function(){
+		window.location.href = "http://" + window.location.hostname + window.location.pathname;
+	});
+	$("#ad").click(function(){
+		window.location.href = "https://absolutedouble.co.uk/";
+	});
+	
+	// Show the home page
 	$("#loader").fadeOut(200);
 	$("#home").delay(200).fadeIn(200);
+	
+	if (window.location.protocol === "https:"){
+		// Due to the MyPC client running over HTTP, HTTPS requests to it will be blocked
+		// To circumvent this we ask the user to switch to HTTP... :/
+		$("#https_warning").delay(550).slideDown(500);
+		setTimeout(function(){
+			$("#https_warning").addClass("warn");
+		},1000);
+	}
 };
 var ShowUserResult = function(data){
 	console.log(data);
 	CreateMyPC(data);
 	
 	$(".sect_title").click(function(){
-		if ($("#tbl_" + $(this).data("opens")).is(":visible")){
-			$("#tbl_" + $(this).data("opens")).slideUp(500);
+		if ($(this).is(":visible")){
+			$(this).slideUp(500);
 		} else {
-			$("#tbl_" + $(this).data("opens")).slideDown(500);
+			$(this).slideDown(500);
 		}
 	});
 	
@@ -49,6 +95,11 @@ var ShowUserResult = function(data){
 	$("#mypc").delay(200).fadeIn(200);
 };
 var CreateMyPC = function(d){
+	/*
+	 *	This (rather large) function will interpret the JSON data from MyPC client.
+	 *	There is a more efficient way of doing this.. which I will implement soon...
+	*/
+	
 	document.title = "MyPC | " + d.CPU[0][7];
 	
 	// Set PC name

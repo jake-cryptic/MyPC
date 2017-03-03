@@ -2,99 +2,88 @@
 <html lang="en">
 	<head>
 	
+		<!-- Meta data -->
 		<title>Loading</title>
-		<style type='text/css'>
-		body{width:100%;padding:0;margin:0;font-weight:100;font-family:sans-serif;}
-		h1{font-size:3.1em;font-weight:100;}h2{font-size:2.7em;font-weight:100;}
-		@-ms-keyframes uil-ring-anim{0%{-ms-transform:rotate(0);-moz-transform:rotate(0);-webkit-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0)}100%{-ms-transform:rotate(360deg);-moz-transform:rotate(360deg);-webkit-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}@-moz-keyframes uil-ring-anim{0%{-ms-transform:rotate(0);-moz-transform:rotate(0);-webkit-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0)}100%{-ms-transform:rotate(360deg);-moz-transform:rotate(360deg);-webkit-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}@-webkit-keyframes uil-ring-anim{0%{-ms-transform:rotate(0);-moz-transform:rotate(0);-webkit-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0)}100%{-ms-transform:rotate(360deg);-moz-transform:rotate(360deg);-webkit-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}@-o-keyframes uil-ring-anim{0%{-ms-transform:rotate(0);-moz-transform:rotate(0);-webkit-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0)}100%{-ms-transform:rotate(360deg);-moz-transform:rotate(360deg);-webkit-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}@keyframes uil-ring-anim{0%{-ms-transform:rotate(0);-moz-transform:rotate(0);-webkit-transform:rotate(0);-o-transform:rotate(0);transform:rotate(0)}100%{-ms-transform:rotate(360deg);-moz-transform:rotate(360deg);-webkit-transform:rotate(360deg);-o-transform:rotate(360deg);transform:rotate(360deg)}}
-		.uil-ring-css {background:none;position:relative;width:200px;height:200px;}
-		.uil-ring-css > div {
-			text-align:center;
-			position:absolute;
-			display:block;
-			width:160px;
-			height:160px;
-			top:20px;
-			left:20px;
-			border-radius:80px;
-			box-shadow:0 6px 0 0 #ffffff;
-			-ms-animation:uil-ring-anim .75s linear infinite;
-			-moz-animation:uil-ring-anim .75s linear infinite;
-			-webkit-animation:uil-ring-anim .75s linear infinite;
-			-o-animation:uil-ring-anim .75s linear infinite;
-			animation:uil-ring-anim .75s linear infinite;
-		}
-		#loader{
-			background:#1A1A1A;
-			height:100vh;
-			display:flex;
-			justify-content:center;
-			align-items:center;
-			color:#fff;
-		}
-		#home,#mypc{display:none;}
-		#mypc{margin:1%;width:98%;}
-		#pc_nm{margin:1% 0;}
-		.sect_title{font-size:2.3em;font-weight:400;cursor:pointer;}
-		table {
-			display:none;
-			width:100%;
-			border-collapse:collapse;
-			background-color:rgba(0,0,0,0.75);
-			color:white;
-			margin-bottom:1.5%;
-		}
-		th {
-			padding:.5em;
-			font-size:1.5em;
-		}
-		tr {
-			transition:.2s ease-in-out all;
-			border:1px solid black;
-			text-align:center;
-		}
-		td {
-			padding:1em;
-		}
-		table tbody>tr:hover {
-			background-color:rgba(255,255,255,0.7);
-		}
-		.light{background-color:rgba(255,255,255,0.5);color:#000;}
-		.dark{background-color:rgba(0,0,0,0.3);color:#fff;}
-		</style>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta http-equiv="content-language" content="en" />
+		<meta name="author" content="Jake Mcneill" />
+		<meta name="description" content="MyPC | A new way to check PC specifications." />
+		<meta name="keywords" content="pc, windows, MyPC, AbsoluteDouble" />
+		
+		<!-- CSS -->
+		<link rel="stylesheet" type="text/css" href="mypc.css" media="screen" />
 	
 	</head>
 	<body>
 	
 		<div id="loader">
-			<div class='uil-ring-css' style='transform:scale(1);'><div></div></div><br /><h1>Loading MyPC</h1>
+			<div class='uil-ring-css' style='transform:scale(1);'><div></div></div><br /><h1 id="loading_txt">Loading MyPC</h1>
 		</div>
 		
+		<!-- Webpage content -->
 		<div id="home">
-			<h2>Home</h2>
-			<a href="MyPC.exe" class="download">Download MyPC version 1</a>
+			<div id="https_warning">
+				<span class="page_title">Please read!</span>
+				<span class="page_slogan">Due to how MyPC works you must use HTTP to view your results, if you just wish to view the site though you can use HTTPS.</span>
+				<div id="opts">
+					<button id="goto_http" class="hpb">Switch to HTTP</button>
+				</div>
+			</div>
+			<div id="banner">
+				<span class="page_title">MyPC | Home</span>
+				<span class="page_slogan">A new way to check PC specifications</span>
+			</div>
+			<div id="dl">
+				<span class="dl_title">Downloads & Source Code</span>
+				<div id="opts">
+					<button id="dl_mypc" class="hpb">Download MyPC</button>
+					<button id="np_git" class="hpb">MyPC GitHub</button>
+				</div>
+			</div>
+			<div id="ad">
+				<span id="backtoabsd">absolutedouble.co.uk</span>
+			</div>
 		</div>
 		<div id="mypc">
 			<h2 id="pc_nm">MyPC</h2>
 			<span id="pc_rg">UNK</span><br />
-			<span class="sect_title" data-opens="sys">System</span><br />
-			<table id="tbl_sys"><tbody id="sys" class="inf_sect"></tbody></table>
-			<span class="sect_title" data-opens="cpu">CPU</span><br />
-			<table id="tbl_cpu"><tbody id="cpu" class="inf_sect"></tbody></table>
-			<span class="sect_title" data-opens="bse">Motherboard</span><br />
-			<table id="tbl_bse"><tbody id="bse" class="inf_sect"></tbody></table>
-			<span class="sect_title" data-opens="ram">RAM</span><br />
-			<table id="tbl_ram"><tbody id="ram" class="inf_sect"></tbody></table>
-			<span class="sect_title" data-opens="gpu">GPU</span><br />
-			<table id="tbl_gpu"><tbody id="gpu" class="inf_sect"></tbody></table>
-			<span class="sect_title" data-opens="hdd">Storage</span><br />
-			<table id="tbl_hdd"><tbody id="hdd" class="inf_sect"></tbody></table>
-			<span class="sect_title" data-opens="nic">Network Cards</span><br />
-			<table id="tbl_nic"><tbody id="nic" class="inf_sect"></tbody></table>
-			<span class="sect_title" data-opens="usr">User Accounts</span><br />
-			<table id="tbl_usr"><tbody id="usr" class="inf_sect"></tbody></table>
+			<div class="sect">
+				<span class="sect_title" data-opens="sys">System</span><br />
+				<table id="tbl_sys"><tbody id="sys" class="inf_sect"></tbody></table>
+			</div>
+			<div class="sect">
+				<span class="sect_title" data-opens="cpu">CPU</span><br />
+				<table id="tbl_cpu"><tbody id="cpu" class="inf_sect"></tbody></table>
+			</div>
+			<div class="sect">
+				<span class="sect_title" data-opens="bse">Motherboard</span><br />
+				<table id="tbl_bse"><tbody id="bse" class="inf_sect"></tbody></table>
+			</div>
+			<div class="sect">
+				<span class="sect_title" data-opens="ram">RAM</span><br />
+				<table id="tbl_ram"><tbody id="ram" class="inf_sect"></tbody></table>
+			</div>
+			<div class="sect">
+				<span class="sect_title" data-opens="gpu">GPU</span><br />
+				<table id="tbl_gpu"><tbody id="gpu" class="inf_sect"></tbody></table>
+			</div>
+			<div class="sect">
+				<span class="sect_title" data-opens="hdd">Storage</span><br />
+				<table id="tbl_hdd"><tbody id="hdd" class="inf_sect"></tbody></table>
+			</div>
+			<div class="sect">
+				<span class="sect_title" data-opens="nic">Network Cards</span><br />
+				<table id="tbl_nic"><tbody id="nic" class="inf_sect"></tbody></table>
+			</div>
+			<div class="sect">
+				<span class="sect_title" data-opens="usr">User Accounts</span><br />
+				<table id="tbl_usr"><tbody id="usr" class="inf_sect"></tbody></table>
+			</div>
 		</div>
 		
+		<!-- Javascript put here to improve page load performance -->
 		<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
 		<script type="text/javascript" src="mypc.js" defer></script>
 	
