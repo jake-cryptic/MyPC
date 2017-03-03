@@ -22,7 +22,12 @@ namespace Absx2.MyPC
             System.Diagnostics.Process.Start("http://projects.absolutedouble.co.uk/mypc/");
 
             // Wait 30 seconds and stop server
-            Thread.Sleep(-1);
+            Thread.Sleep(10000);
+            Console.ForegroundColor = ConsoleColor.DarkYellow;
+            Console.WriteLine("\nServer will automatically close in 20 seconds.\n");
+            Console.ForegroundColor = ConsoleColor.White;
+
+            Thread.Sleep(20000);
             ws.Stop();
         }
     }

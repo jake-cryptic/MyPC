@@ -21,6 +21,7 @@ namespace Absx2.MyPC
 
         public void Run()
         {
+            Console.WriteLine("MyPC beta v1.0\n");
             ThreadPool.QueueUserWorkItem((o) =>
             {
                 try
@@ -35,8 +36,9 @@ namespace Absx2.MyPC
                                 if (ctx.Request.RawUrl == "/close") Environment.Exit(0);
 
                                 Console.ForegroundColor = ConsoleColor.Green;
-                                Console.WriteLine("\nWebRequest from {0}\nRequested: {1}\n\nHeaders:\n--------------------------\n{2}--------------------------\n", 
-                                    ctx.Request.UserHostAddress, ctx.Request.Url, ctx.Request.Headers);
+                                //Console.WriteLine("\nWebRequest from {0}\nRequested: {1}\n\nHeaders:\n--------------------------\n{2}--------------------------\n", 
+                                //    ctx.Request.UserHostAddress, ctx.Request.Url, ctx.Request.Headers);
+                                Console.WriteLine("Request from: {0}\n", ctx.Request.UserHostAddress);
                                 Console.ForegroundColor = ConsoleColor.White;
 
                                 // Create a MySystem object
